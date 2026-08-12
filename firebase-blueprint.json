@@ -1,0 +1,33 @@
+{
+  "entities": {
+    "contact_messages": {
+      "title": "Contact Messages",
+      "description": "Inquiries, collaboration proposals, and messages sent through Aima's portfolio",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "organization": { "type": "string" },
+        "subject": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "email", "subject", "message"]
+    },
+    "guestbook": {
+      "title": "Research Network Guestbook",
+      "description": "Visitor messages, endorsements, and community feedback",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "affiliation": { "type": "string" },
+        "message": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "likes": { "type": "number" }
+      },
+      "required": ["name", "message"]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Contact messages: anyone can create, no public reading/modifying
+    match /contact_messages/{messageId} {
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.email is string
+                    && request.resource.data.subject is string
+                    && request.resource.data.message is string;
+      allow read, update, delete: if false;
+    }
+
+    // Guestbook: public read, public create with string requirements, allow liking
+    match /guestbook/{entryId} {
+      allow read: if true;
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.message is string;
+      allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['likes']);
+      allow delete: if false;
+    }
+  }
+}
